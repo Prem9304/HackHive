@@ -1,0 +1,21 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  hackhive-app:
+    build: .
+    container_name: hackhive-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - kali-linux
+    restart: always
+
+  kali-linux:
+    image: kalilinux/kali-rolling # Or your custom kali-default image if you have one
+    container_name: kali-default
+    tty: true
+    stdin_open: true
+    restart: always
